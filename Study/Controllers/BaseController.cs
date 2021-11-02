@@ -8,11 +8,11 @@ using Study.DTO;
 
 namespace Study.Controllers
 {
-    [Route("api/base")]
+    [Route("api/base/{username}")]
     [ApiController]
     public class BaseController : ControllerBase
     {
-        // get all elements
+        // [start] get all elements ----------------------------
         [HttpGet]
         public IEnumerable<string>  Get()
         {
@@ -30,6 +30,19 @@ namespace Study.Controllers
             Console.WriteLine("1234556");
             return Ok("hello");
         }
+        
+        // template的意思就是，在 route 里面配置的 路由后面接着添加
+        [HttpGet("userinfo/{age}")] 
+        public IActionResult GetByName(
+            [FromRoute] string username,
+            [FromRoute] string age) // 对于自己的 route，还能继续 从 route中获取参数
+        {
+            Console.WriteLine(username + "---" + age);
+            Console.WriteLine("1234556");
+            return Ok("hello");
+        }
+        
+        // [end] get all elements ----------------------------
         
         // create element by id 
         [HttpPost("{id}")]
